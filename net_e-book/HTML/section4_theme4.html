@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<title>КОМПЮТЪРНИ МРЕЖИ | РАЗДЕЛ 4 - МРЕЖОВИ ПРОТОКОЛИ И УСЛУГИ| TCP/IP помощни програми </title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<link rel="stylesheet" type="text/css" href="styles.css" />
+<style type="text/css">
+<!--
+.REMARK {color: #0033FF}
+.stepen {font-size:xx-small;
+         vertical-align:super}
+.style1 {
+	font-size: larger;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+<body>
+<a name="begin"></a>	
+        <div id="wrapper">
+		<div id="top">		</div>
+		<div id="content">
+			<div id="header">
+				    <div id="menu_right">
+			            <ul>
+			                <li><a href="index.html">НАЗАД (към менюто)</a></li>
+			            </ul>
+		            </div>
+			</div>
+			
+		  <div id="TOCtext">
+		  <hr />
+		  <p class="Theme">ТЕМА 4: TCP/IP помощни програми</p><hr />
+		  <p class="section"><a href="#ping">PING</a></p>
+		  <p class="section"><a href="#arp">ARP</a></p>
+		  <p class="section"><a href="#netstat">Netstat</a></p>
+		  <p class="section"><a href="#ipconfig">Ipconfig и ifconfig</a></p>
+		  <p class="section"><a href="#trace">Tracert и Traceroute</a></p>
+		  <hr />
+		  </div>
+		  <div id="text">	
+			  <div align="justify">
+			    <p> TCP/IP е сложен сбор от протоколи. Повечето реализации на отделните  производители включват най-различни помощни програми за разглеждане на  конфигурационната информация и отстраняване на проблеми.  Помощните програми, които изпълняват една и съща функция,  могат да имат различни имена, дадени им от различните производители.</p>
+			    <p><a name="ping" id="ping"></a></p>
+			    <p class="FixedItem">Ping (Packet Internet  groper ) </p>
+		          <p>Това е проста, но много полезна помощна програма за работа от  командния ред, включвана в повечето реализации на TCP/ IP. Ping може да се  използва както с името на хоста, така и с IP адреса, за да се тества IP  свързването. Ping работи, като изпраща ICMP ехо заявка към компютъра  местоназначение. Приемащият компютър след това изпраща обратно съобщение за  ICMP ехо отговор. 
+		          Също така е възможно да използвате ping, за да разберете IP адреса  на даден хост, когато знаете името. Ако въведете командата <div align="center" class="style1">ping google.bg</div>
+		           ще видите IP адреса, от който е върнат  отговорът.</p>
+	              <p align="center"> <img src="IMAGES/ping.png" alt="ping" width="465" height="199" /></p>
+		          <p>Една друга помощна програма, nslookup, връща IP адреса да дадено име  на хост и хост името за даден IP адрес.</p>
+			      <p>Windows и  UNIX/ Linux операционните системи използват командата ping от командния ред.  Съществуват и ping реализации от независими производители, някои от които  предоставят графичен интерфейс. </p> 
+				  <p align="center"><a href=#begin><img src="images/arrw-up.gif" alt="към начакото на страницата" width="153" height="45" /></a></p><hr />
+			      <p class="FixedItem"> 	<a name="arp" id="arp"></a></p>
+			      <p class="FixedItem">ARP  
+		          </p>
+			      <p> Протоколът ARP (Address Resolution Protocol) е средството, чрез което компютрите а мрежата съпоставят  логически IP адреси с физически хардуерни (МАС) адреси. ARP изгражда и поддържа  таблица, наречена ARP кеш, в която се съдържат тези съпоставяния. RARP.ce  използва от машина, която не знае собствения си IP адрес, за да получи  информацията на база своя МАС адрес. </p>
+			      <p>Помощната програма ARP също  работи от командния ред и се разпространява с TCP/IP стека на  Windows и UNIX/Linux. Тя може да се използва за разглеждане и промяна на  съпоставянията между IP и МАС адреси. C помощта на програмата ARP можете да покажете  съдържанието на кеша и да добавяте или изтривате специфични записи:</p>
+			      <p align="center"><img src="IMAGES/arp.png" alt="arp" width="429" height="107" /></p>
+			      <p>C командата аrр могат да се  използват следните ключове: </p>
+		        <ul class="B1Item">
+				      <li>аrр -а -  Показва кеша </li>
+				      <li>аrр -S -  Добавя перманентно съпоставяне между IP и МАС адрес </li>
+				      <li>аrр -d -  Изтрива запис </li>
+		        </ul>
+				    <p>В отделните реализации на  производителите са включени и други ключове.</p>
+				    <p align="center"><a href="#begin"><img src="images/arrw-up.gif" alt="към начакото на страницата" width="153" height="45" /></a></p>
+				    <hr />
+				    <p><span class="FixedItem"><a name="netstat" id="netstat"></a></span></p>
+				    <p><span class="FixedItem">Netstat </span></p>
+				    <p>Често пъти е полезно да разгледате мрежовите статистики. Командата  netstat се използва в Windows и UNIX/Linux, за да покаже информация за TCP/IP  връзките и протокола. <br />
+		        Командата netstat предоставя списък с връзки, които са текущо  активни:</p>
+			        <p align="center"><img src="IMAGES/netstat.png" alt="netstat" width="587" height="201" /></p>
+			        <p>Можете да видите  протоколите, използвани за всяка връзка, името на локалния компютър и номера на  порта, използвани за връзката, „чуждестранният&quot; (foreign) адрес (името на  отдалечения компютър) и състоянието на връзката. </p>
+			        <p>Командата netstat може да се  използва с няколко ключа:</p>
+			        <table border="1" align="center" >
+                      <tr>
+                        <td width="72" align="center" valign="middle" bgcolor="#CCCCCC">                          Ключ </td>
+                        <td width="442" valign="middle" bgcolor="#CCCCCC"><p>Функция</p></td>
+                      </tr>
+                      <tr>
+                        <td width="72" valign="top" bgcolor="#CCCCCC"><p>-а</p></td>
+                        <td width="442" valign="top" bgcolor="#CCCCCC"><p>Показва всички връзки и слушащи портове </p></td>
+                      </tr>
+                      <tr>
+                        <td width="72" valign="top" bgcolor="#CCCCCC"><p>-е </p></td>
+                        <td width="442" valign="top" bgcolor="#CCCCCC"><p>Показва Ethernet статистики </p></td>
+                      </tr>
+                      <tr>
+                        <td width="72" valign="top" bgcolor="#CCCCCC"><p>-n </p></td>
+                        <td width="442" valign="top" bgcolor="#CCCCCC"><p>Показва адреси и портове </p></td>
+                      </tr>
+                      <tr>
+                        <td width="72" valign="top" bgcolor="#CCCCCC"><p>-р<span class="stepen">1 </span></p></td>
+                        <td width="442" valign="top" bgcolor="#CCCCCC"><p>Позволява ви да показвате информация само за избран протокол </p></td>
+                      </tr>
+                      <tr>
+                        <td width="72" valign="top" bgcolor="#CCCCCC"><p>-t, -u, -w, -x<span class="stepen">2</span> </p></td>
+                        <td width="442" valign="top" bgcolor="#CCCCCC"><p>Позволява ви да показвате информация за TCP, UDP, RAW или сокети </p></td>
+                      </tr>
+                      <tr>
+                        <td width="72" valign="top" bgcolor="#CCCCCC"><p>-r </p></td>
+                        <td width="442" valign="top" bgcolor="#CCCCCC"><p>Показва маршрутната таблица </p></td>
+                      </tr>
+                      <tr>
+                        <td width="72" valign="top" bgcolor="#CCCCCC"><p>-s </p></td>
+                        <td width="442" valign="top" bgcolor="#CCCCCC"><p>Предоставя обобщение на статистиките за всеки протокол </p></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" valign="top" bgcolor="#999999"><p><span class="stepen">1</span> Използва се с реализацията на    Microsoft TCP/IP </p></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" valign="top" bgcolor="#999999"><p><span class="stepen">2</span> Използва се с реализацията на Linux    ТСР/IР </p></td>
+                      </tr>
+                </table>
+				    <p>Netstat статистиките могат да бъдат полезни при отстраняване на  проблеми с TCP/IP връзките. Следващият пример показва изобилието от информация,  предоставяна в режим на обобщение (ключът -s). Докладите за грешки са  особено полезни при диагностициране на проблеми с хардуера и маршрутизирането. </p>
+				    <p align="center"><img src="IMAGES/netstat_s.png" alt="netstat -s" width="465" height="710" /></p>
+				     <p align="center"><a href="#begin"><img src="images/arrw-up.gif" alt="към начакото на страницата" width="153" height="45" /></a></p>
+				    <hr />
+				    <p class="FixedItem"><a name="ipconfig" id="ipconfig"></a></p>
+				    <p class="FixedItem">Ipconfig, ifconfig </p>
+				    Информацията за TCP/IP  конфигурацията може да се  изведе чрез  използване на  помощни програми, които зависят от операционната  система - <strong>Ipconfig </strong>за Windows и <strong>Ifconfig </strong> за  UNIX и Linux.
+			        <p>Конфигурационните помощни  програми могат да предоставят богата информация, включваща текущо използвания  IP адрес, МАС адреса, подмрежовата маска и подразбиращия се шлюз; адреси на DNS  и WINS сървъри; DHCP информация; разрешени услуги. Съществуват множество
+				      ключове, зависещи от  производителя и специфичната помощна програма. Тука е показан пример, който демонстрира  резултатите  от използването на командата ipconfig с ключа /all в Windows XP.</p>
+				    <p align="center"><img src="IMAGES/ipconfig.png" alt="ipconfig /all" width="595" height="606" /></p>
+				    <p>&nbsp;</p>
+				    <p align="center"><a href="#begin"><img src="images/arrw-up.gif" alt="към начакото на страницата" width="153" height="45" /></a></p>
+				    <hr />
+			    <p><span class="FixedItem"><a name="trace" id="trace"></a></span></p>
+				    <p><span class="FixedItem">Tracert и Traceroute </span><br />
+		        Често пъти е полезно да бъде проследен маршрута, по който даден пакет  поема пътя от компютъра източник до хоста местоназначение. TCP/IP стековете  включват помощна програма за проследяване на маршрута, която позволява да  идентифицирате маршрутизаторите, през които преминава съобщението. В зависимост  от вашата операционна система можете да използвате Tracert ( Windows) или Traceroute ( UNIX/Linux). </p>
+				    <p>В следващият пример е използване командата tracert за да бъде проследен маршрута  на пакетите от източника до местоназначението: </p>
+				    <p align="center"><img src="IMAGES/tracert.png" alt="tracert" width="520" height="259" /> </p>
+				    <p>Както можете да видите,  проследяването показва IP адрес и името на препращащия компютър или  маршрутизатор. На пакета са му били необходими четиринадесет скока, за да достигне  до своето местоназначение, което е хостьт с име www.google.bg. Времената за  отиване и връщане (в милисекунди) са показани за всеки скок.</p>
+				    <p class="FixedItem">&nbsp;</p>
+					<p align="center"><a href=#begin><img src="images/arrw-up.gif" alt="към начакото на страницата" width="153" height="45" /></a></p>
+</div>
+		    </div>
+		</div>
+		<div id="bottom">
+		</div>
+	</div>
+</body>
+</html>

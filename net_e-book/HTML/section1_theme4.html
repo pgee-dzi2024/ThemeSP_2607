@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<title>КОМПЮТЪРНИ МРЕЖИ | РАЗДЕЛ 1 - МРЕЖОВИ ХАРДУЕР | Изработване на мрежови кабел.</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<link rel="stylesheet" type="text/css" href="styles.css" />
+<style type="text/css">
+<!--
+.REMARK {color: #0033FF}
+-->
+</style>
+</head>
+<body>
+<a name="begin"></a>	
+        <div id="wrapper">
+		    <div id="top">		
+		    </div>
+		    <div id="content">
+			    <div id="header">
+				    <div id="menu_right">
+			            <ul>
+			                <li><a href="index.html">НАЗАД (към менюто)</a></li>
+			            </ul>
+		            </div>
+				</div>
+		     	<div id="TOCtext">
+					<hr />
+					<p class="Theme">ТЕМА 4: Изработване на мрежови кабел.</p><hr />
+				   	<p class="section"><a href="#t568">Стандарти Т568А и Т568B</a></p>
+				   	<p class="section"><a href="#it2">Практически стъпки за свързаване на UTP кабел и RJ45 конектор</a></p>
+				   <hr />
+			    </div>
+		        <div id="text">	
+			       <div align="justify">
+			           <p>Голяма част от съвременните мрежи са кабелни, като най-често използваните кабели са кабелите тип усукана двойка. Има няколко <img src="IMAGES/Rj45plug-8p8c.png" alt="номерация на крачетата на RJ45" width="250" height="269" hspace="10" align="right" />стандарта за изграждане на  <strong>Ethernet</strong> с усукани двойки. Най използваните са  <strong>10BASE-T</strong>, <strong>100BASE-TX</strong>, and <strong>1000BASE-T</strong> (Gigabit Ethernet), които позволяват скорости на предаване съответно от 10 Mbit/s, 100 Mbit/s и 1000 Mbit/s (1 Gbit/s). И в трите случая се използва един и същи конектор - 8 контактния модулен конектор, наричан още RJ45 конектор.  Прието е контактните пластинки на този конектор да се номерират така, както е показано на снимката в дясно.</p>                        
+			           <p>Използва се кабел  UTP, който има 4 усукани двойки проводници. Максималната дължина на кабела не трябва да надвишава 100 м.</p>
+	                 <p>Свързващите кабели за всеки от посочените  Ethernet стандарти най-често реализират т.н. &quot;право&quot; ( 'straight-through' ) свързване (краче 1 на едния конектор към краче 1 на другия, 2 към 2, 3 към 3 и т.н), но в някои случаи се налага да се реализира и т.н. &quot;кръстосано&quot; ('crossover') свързване.		             </p>
+			           <p>10BASE-T и 100BASE-T изискват само две усукани двойки, които се свързват съответно едната към крачета  1 и 2 ( предаване на данни - TX), а другата - към крачета  3 и 6 (приемане - RX). Другите две усукани двойки на кабела не се използват. При 1000BASE-T мрежите се използват и четирите усукани двойки проводници.</p>
+			           <p><a name="t568" id="t568"></a>Прието е свързването на кабела към конектора да се извършва по един от двата начина(стандарта) T568A или T568B предвидени в набора стандарти TIA/EIA-568-А/B.1-2001 (ТIA - Telecommunications Industry Association, EIA - Electronic Industries Alliance). Двата стандарта се различават само по това, че взаимно разменят положението на двете използвани двойки проводници за приемане и предаване (TX/RX).  Това означава, че кабел, който е опроводен по T568A стандарт от едната страна и T568B от другата се нарича  crossover (кръстосан), а такъв, който е от двете страни е еднакво опроводен - прав.	</p>
+			           <table border="1" align="center" bgcolor="#CCCCCC" >
+                         <tbody>
+                           <tr>
+                             <td rowspan="2">краче</td>
+                             <td colspan="2">TIA/EIA-568-B T568B опроводяване </td>
+                             <td colspan="2"><a  title="TIA/EIA-568-A">TIA/EIA-568-A</a> T568A опроводяване </td>
+                           </tr>
+                           <tr>
+                             <td>чифт</td>
+                             <td>цвят</td>
+                             <td>чифт</td>
+                             <td>цвят</td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td bgcolor="#FFFFFF">2</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 2 /Проводник 1" src="IMAGES/60px-Wire_white_orange_stripe.svg.png" width="60" border="0" height="18" />бял/оранжев</td>
+                             <td bgcolor="#FFFFFF">3</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 3 /Проводник 1" src="IMAGES/60px-Wire_white_green_stripe.svg.png" width="60" border="0" height="18" /> бял/зелен </td>
+                           </tr>
+                           <tr>
+                             <td>2</td>
+                             <td bgcolor="#FFFFFF">2</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 2 /Проводник 2" src="IMAGES/60px-Wire_orange.svg.png" width="60" border="0" height="18" />оранжев</td>
+                             <td bgcolor="#FFFFFF">3</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 3 /Проводник 2" src="IMAGES/60px-Wire_green.svg.png" width="60" border="0" height="18" /> зелен</td>
+                           </tr>
+                           <tr>
+                             <td>3</td>
+                             <td bgcolor="#FFFFFF">3</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 3 /Проводник 1" src="IMAGES/60px-Wire_white_green_stripe.svg.png" width="60" border="0" height="18" /> бял/зелен</td>
+                             <td bgcolor="#FFFFFF">2</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 2 /Проводник 1" src="IMAGES/60px-Wire_white_orange_stripe.svg.png" width="60" border="0" height="18" />бял/оранжев</td>
+                           </tr>
+                           <tr>
+                             <td>4</td>
+                             <td bgcolor="#FFFFFF">1</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 1 /Проводник 2" src="IMAGES/60px-Wire_blue.svg.png" width="60" border="0" height="18" />син</td>
+                             <td bgcolor="#FFFFFF">1</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 1 /Проводник 2" src="IMAGES/60px-Wire_blue.svg.png" width="60" border="0" height="18" />син</td>
+                           </tr>
+                           <tr>
+                             <td>5</td>
+                             <td bgcolor="#FFFFFF">1</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 1 /Проводник 1" src="IMAGES/60px-Wire_white_blue_stripe.svg.png" width="60" border="0" height="18" />бял/син</td>
+                             <td bgcolor="#FFFFFF">1</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 1 /Проводник 1" src="IMAGES/60px-Wire_white_blue_stripe.svg.png" width="60" border="0" height="18" />бял/син</td>
+                           </tr>
+                           <tr>
+                             <td>6</td>
+                             <td bgcolor="#FFFFFF">3</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 3 /Проводник 2" src="IMAGES/60px-Wire_green.svg.png" width="60" border="0" height="18" /> зелен</td>
+                             <td bgcolor="#FFFFFF">2</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 2 /Проводник 2" src="IMAGES/60px-Wire_orange.svg.png" width="60" border="0" height="18" /></a>оранжев</td>
+                           </tr>
+                           <tr>
+                             <td>7</td>
+                             <td bgcolor="#FFFFFF">4</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 4 /Проводник 1" src="IMAGES/60px-Wire_white_brown_stripe.svg.png" width="60" border="0" height="18" />бял/кафяв</td>
+                             <td bgcolor="#FFFFFF">4</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 4 /Проводник 1" src="IMAGES/60px-Wire_white_brown_stripe.svg.png" width="60" border="0" height="18" /></a>бял/кафяв</td>
+                           </tr>
+                           <tr>
+                             <td>8</td>
+                             <td bgcolor="#FFFFFF">4</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 4 /Проводник 2" src="IMAGES/60px-Wire_brown.svg.png" width="60" border="0" height="18" />кафяв</td>
+                             <td bgcolor="#FFFFFF">4</td>
+                             <td bgcolor="#FFFFFF"><img alt="Чифт 4 /Проводник 2" src="IMAGES/60px-Wire_brown.svg.png" width="60" border="0" height="18" />кафяв</td>
+                           </tr>
+                         </tbody>
+                     </table>
+			           <p>Когато използваме хъб или суич, както е показано на схемата, предаващите информация проводници (Tx) на компютъра трябва да бъдат свързани с приемащите   информация проводници (Rx)  на хъба. И обратно: приемащите проводници (Rx) на хъба трябва да бъдат   свързани с предаващите<img src="IMAGES/net3.png" alt="мрежа" width="330" height="131" hspace="10" vspace="10" border="2" align="left" /> проводници (Tx) на компютъра. Типично за един hub или switch  е да има MDIX (Medium Dpendent   Interface Crossover (&quot;X&quot; изразява crossover ) портове. Това разрешава на   компютъра, който е свързан в другия край на кабела да използва тези MDI (Medium   Dependent Interface) портовете без да има нужда от &quot;кросоувър&quot; кабел. Когато   казваме, че портовете на хъба са MDIX имаме в предвид, че една от функциите на   хъба е автоматично да изпълнява функцията на &quot;кросоувър&quot;, което е необходимо за   правилното свързване(подреждане) на кабелите един със друг. Имайки хъб със MDIX   портове не ни е нужен &quot;кросоувър&quot; кабел. Когато обаче не използваме суич или   хъб, а само &quot;кросоувър&quot; кабел, той трябва да изпълнява функцията на свързване. </p>
+					   <p></p>
+					   <p align="center"><a href=#begin><img src="images/arrw-up.gif" alt="към начакото на страницата" width="153" height="45" /></a></p>
+					   <hr />
+					   
+			           <p class="FixedItem"><a name="it2" id="it2"></a></p>
+			           <p class="FixedItem">Практическите стъпки при свързване на RJ45 конектор към UTP са следните:</p>
+			           <div >
+			             <p><img src="IMAGES\kabel36ue.jpg" alt="снимка 2" width="182" height="158" hspace="10" align="right" />Обелва се около 5 см. от   обвивката на кабела в единият край. Това трябва да се направи много внимателно (за предпочитане със специален инструмент) за да не нараним или срежем жичките, които са вътре. Ако това се случи, то може   да навреди на характеристиките на кабела или да го повреди до такава степен, че   да го направи неизползваем.	</p>
+			             <p>&nbsp;</p>
+			             <p>&nbsp;</p>
+			             <p><br />
+                         </p>
+		             </div>
+						
+	                     <div>
+	                       <p><img src="IMAGES\kabel43ld.jpg" alt="снимка 3" width="221" height="146" hspace="10" border="0" align="left" />Разделете жичките,   но бъдете сигурни, че с едната ръка държите кабела в основата на обеленото (виж   снимката). С това ще запазите жичките комплектовани и няма да им позволите да се   развият. Започнете внимателно да размотавате жичките на вашият   кабел, но внимавайте да не ги размотаете и вътре в необеления кабел.   Размотавайте до там, до където сте обелили. След като сте ги размотали,   започнете да ги подреждате в правилният ред (според избрания предварително вариан за опроводяване -T568A или Т568B). </p>
+	                       <p>&nbsp;</p>
+                     </div>
+		                 <div>
+		                   <p><img src="IMAGES\kabel64fd.jpg" alt="снимка 5" width="213" height="165" hspace="10" border="0" align="right" />С едната ръка продължавайте да държите   подредените жички, а с другата вземете клещи секачки и премерете около 1.5 см (не   повече) считано от началото на &quot;кожуха&quot;. Сложете клещите напречно на жичките (виж снимката). Тук трябва да се направи едно движение с   клещите, с което да се отрежат всички жички заедно. Ако не успете,    ще трябва да повторите посочените операции до момента отново. Не режете   повторно на едно и също място. Това може да навреди в   последствие.</p>
+		                   <p>&nbsp;</p>
+		                 </div>
+		                 <div>
+		                   <p>&nbsp;</p>
+		                   <p><img src="IMAGES\kabel78rz.jpg" alt="снимка 6" width="167" height="266" hspace="10" border="0" align="left" />Вземете  конекторa    започнете да вкарвате жичките вътре така, както ги подредихте преди.  Вкарвайте жичките и кабела с   &quot;кожуха&quot; вътре в конектора, докато жичките не стигнат почти до края, а кабела с   кожуха е влязъл в буксата толкова, колкото е на снимката.</p>
+		                   <p>&nbsp;</p>
+		                   <p>&nbsp;</p>
+		                   <p>&nbsp;</p>
+		                   <p>&nbsp;</p>
+		                   <p>&nbsp;</p>
+		                   <p>&nbsp;</p>
+		                 </div>
+		                 <div>
+		                   <p><img src="IMAGES\kabel83gs.jpg" alt="снимка 7" width="275" height="164" hspace="10" border="0" align="right" />Сега вземете клещите за букси. (Има различни клещи и тези,   които са на снимката може да не са като тези, които ще имате вие) бъдете   сигурни, че държите кабела здраво с едната ръка. Вкарайте буксата в клещите. Има   само един начин буксата да влезе в клещите. Сега стиснете докато  клещите  се отпусна сами.</p>
+		                   <p>&nbsp;</p>
+		                   <p>&nbsp; </p>
+	                 </div>
+		                 <div>Проверете качеството на извършеното свързване. Част от &quot;кожуха&quot; трябва да е вътре в буксата, за да сме сигурни, че   всичко е минало нормално и жичките няма да се измъкнат. (виж снимката) Това ще   даде сигурност на вашият мрежов кабел</div>
+		                
+		             <p></p>
+		             <p></p>
+		             <p></p>
+		             <p align="center"><a href=#begin><img src="images/arrw-up.gif" alt="към начакото на страницата" width="153" height="45" /></a></p>
+							  
+			  </p>
+			  </ul>
+		    </div>
+		</div>
+		</div>
+		<div id="bottom">		</div>
+	</div>
+</body>
+</html>
