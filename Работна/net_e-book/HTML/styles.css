@@ -3,7 +3,7 @@
 /**************************************************/
 
 body {
-	background: #000099 url('images/back.png') repeat-x top center;
+	background: #000099 url('IMAGES/back.png') repeat-x top center;
 	margin: 0;
 	padding: 0;
 	text-shadow: 111;
@@ -27,7 +27,7 @@ text-align: left;
 /**************************************************/
 
 #top {
-background: url('images/bgtop.png') no-repeat top center; 
+background: url('IMAGES/bgtop.png') no-repeat top center;
 width: 800px;
 height: 78px
 }
@@ -40,7 +40,7 @@ another wrapper that holds all the content                              */
 #content {
 	width: 766px;
 	height: 100%;
-	background-image: url('images/bgmiddle.png');
+	background-image: url('IMAGES/bgmiddle.png');
 	background-repeat: repeat-y;
 	background-position:  center 50%;
 	overflow: hidden;
@@ -52,7 +52,7 @@ another wrapper that holds all the content                              */
 /**************************************************/
 
 #header {
-background: url('images/header.png') no-repeat top center; 
+background: url('IMAGES/header.png') no-repeat top center;
 width: 746px;
 height: 106px;
 color: white;
@@ -85,13 +85,13 @@ font-size: 50px; margin-left:0px; margin-right:0px; margin-top:0px; margin-botto
 #menu li a:link, #menu li a:visited {
 color: navy;
 display: block;
-background:  url('images/off.png') no-repeat top center;
+background:  url('IMAGES/off.png') no-repeat top center;
 height: 29px; padding-left:10px; padding-right:0; padding-top:8px; padding-bottom:0
 }
 	
 #menu li a:hover {
 color: red;
-background:  url('images/on.png') no-repeat top center;
+background:  url('IMAGES/on.png') no-repeat top center;
 height: 29px; padding-left:10px; padding-right:0; padding-top:8px; padding-bottom:0
 }	
 /*                    Right Menu                   */
@@ -123,13 +123,13 @@ text-decoration: none;
 #menu_right li a:link, #menu_right li a:visited {
 color: navy;
 display: block;
-background:  url('images/off.png') no-repeat top center;
+background:  url('IMAGES/off.png') no-repeat top center;
 height: 29px; padding-left:10px; padding-right:0; padding-top:8px; padding-bottom:0px
 }
 	
 #menu_right li a:hover {
 color: red;
-background:  url('images/on.png') no-repeat top center;
+background:  url('IMAGES/on.png') no-repeat top center;
 height: 29px; padding-left:10px; padding-right:0; padding-top:8px; padding-bottom:0
 }	
 
@@ -150,7 +150,7 @@ border: none;
 /**************************************************/
 
 #bottom {
-background: url('images/bgbottom.png') no-repeat bottom center; 
+background: url('IMAGES/bgbottom.png') no-repeat bottom center;
 width: 800px;
 height: 50px
 }
@@ -185,7 +185,7 @@ height: 50px
 	list-style-position: inside;
 	list-style-type: none;
 	font-style: normal;
-	background-image: url('images/texttop.png');
+	background-image: url('IMAGES/texttop.png');
 	background-repeat: repeat-x;
 	background-position: left top;
 	text-indent: 30px;
@@ -233,7 +233,7 @@ height: 50px
 	border-right-style: none;
 	border-bottom-style: none;
 	border-left-style: none;
-	list-style-image: url('images/Bulet2.png');
+	list-style-image: url('IMAGES/Bulet2.png');
 	border-top-color: #00FF00;
 	border-right-color: #339900;
 	border-bottom-color: #FF3300;
@@ -275,7 +275,7 @@ height: 50px
 	border-right-style: none;
 	border-bottom-style: none;
 	border-left-style: none;
-	list-style-image: url('images/bulet1.png');
+	list-style-image: url('IMAGES/bulet1.png');
 	border-top-color: #00FF00;
 	border-right-color: #339900;
 	border-bottom-color: #FF3300;
