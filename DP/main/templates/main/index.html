@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WOL Сървър - Дипломен проект</title>
+    <title>WOL Сървър</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Vue 3 и Axios -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<body class="bg-light">
+<body class="bg-light d-flex flex-column min-vh-100">
 
 <div id="app" class="container py-5">
     <h1 class="mb-4 text-center text-primary">Wake-on-LAN (WOL) Сървър</h1>
@@ -58,6 +58,12 @@
                         <div class="mb-3">
                             <label class="form-label">MAC Адрес</label>
                             <input type="text" v-model="newComputer.mac_address" class="form-control" placeholder="XX:XX:XX:XX:XX:XX" required>
+                        </div>
+                        <!-- НОВО ПОЛЕ ЗА IP/BROADCAST -->
+                        <div class="mb-3">
+                            <label class="form-label">Broadcast / IP Адрес (Опционално)</label>
+                            <input type="text" v-model="newComputer.ip_address" class="form-control" placeholder="напр. 192.168.1.255">
+                            <div class="form-text" style="font-size: 0.8em;">Задължително, ако имате виртуални мрежови карти (VirtualBox, VPN).</div>
                         </div>
                         <button type="submit" class="btn btn-success w-100">
                             Запази в списъка
@@ -136,6 +142,13 @@
         </div>
     </div>
 </div>
+<!-- ФУТЕР -->
+<footer class="bg-dark text-light py-3 mt-auto">
+    <div class="container text-center">
+        <p class="mb-0">&copy; 2026 Банско | Дипломен проект на Фериз Кемал Ходжа. Всички права запазени.<br>
+            <span style="color: #999999">Специалност "Системно програмиране"</span></p>
+    </div>
+</footer>
 
 <script>
     // CSRF настройка
@@ -162,7 +175,7 @@
         data() {
             return {
                 manualMac: '',
-                newComputer: { name: '', mac_address: '' },
+                newComputer: { name: '', mac_address: '', ip_address: '' },
                 computers: [],
                 logs: [],
                 loading: false,
@@ -223,7 +236,7 @@
                 try {
                     await axios.post('/api/computers/', this.newComputer);
                     this.showAlert('Компютърът е запазен успешно!', 'success');
-                    this.newComputer = { name: '', mac_address: '' }; // Изчистване на формата
+                    this.newComputer = { name: '', mac_address: '', ip_address: '' }; // Изчистване
                     this.fetchComputers(); // Опресняване на списъка
                 } catch (error) {
                     let errorMsg = "Грешка при запазване.";

@@ -26,12 +26,10 @@ class WakeLogViewSet(viewsets.ReadOnlyModelViewSet):
 
 @api_view(['POST'])
 def wake_computer(request):
-    """
-    API endpoint за изпращане на WOL пакет.
-    Приема 'mac_address' (за ръчно въвеждане) ИЛИ 'computer_id' (за запазен компютър).
-    """
     mac_address = request.data.get('mac_address')
     computer_id = request.data.get('computer_id')
+    # Взимаме IP адреса, ако е подаден ръчно, иначе ползваме глобалния
+    ip_address = request.data.get('ip_address', '255.255.255.255')
 
     if not mac_address and not computer_id:
         return Response({'error': 'Моля, предоставете MAC адрес или ID на компютър.'},
@@ -42,13 +40,15 @@ def wake_computer(request):
         try:
             computer = Computer.objects.get(id=computer_id)
             mac_address = computer.mac_address
+            # Ако компютърът има записан специфичен IP/Broadcast адрес, ползваме него
+            if computer.ip_address:
+                ip_address = computer.ip_address
         except Computer.DoesNotExist:
             return Response({'error': 'Компютърът не е намерен.'}, status=status.HTTP_404_NOT_FOUND)
 
-    # Извикваме мрежовата функция от utils.py
-    success, message = send_magic_packet(mac_address)
+    # Вече подаваме и ip_address към мрежовата функция!
+    success, message = send_magic_packet(mac_address, ip_address=ip_address)
 
-    # Записваме резултата в базата данни
     WakeLog.objects.create(
         user=request.user if request.user.is_authenticated else None,
         computer=computer,
