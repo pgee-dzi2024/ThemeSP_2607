@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Време на генериране: 12 фев 2026 в 09:32
+-- Време на генериране: 15 март 2026 в 15:56
 -- Версия на сървъра: 10.4.32-MariaDB
 -- Версия на PHP: 8.2.12
 
@@ -85,7 +85,15 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (21, 'Can add session', 6, 'add_session'),
 (22, 'Can change session', 6, 'change_session'),
 (23, 'Can delete session', 6, 'delete_session'),
-(24, 'Can view session', 6, 'view_session');
+(24, 'Can view session', 6, 'view_session'),
+(25, 'Can add Компютър', 7, 'add_computer'),
+(26, 'Can change Компютър', 7, 'change_computer'),
+(27, 'Can delete Компютър', 7, 'delete_computer'),
+(28, 'Can view Компютър', 7, 'view_computer'),
+(29, 'Can add WOL Лог', 8, 'add_wakelog'),
+(30, 'Can change WOL Лог', 8, 'change_wakelog'),
+(31, 'Can delete WOL Лог', 8, 'delete_wakelog'),
+(32, 'Can view WOL Лог', 8, 'view_wakelog');
 
 -- --------------------------------------------------------
 
@@ -177,6 +185,8 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (2, 'auth', 'permission'),
 (4, 'auth', 'user'),
 (5, 'contenttypes', 'contenttype'),
+(7, 'main', 'computer'),
+(8, 'main', 'wakelog'),
 (6, 'sessions', 'session');
 
 -- --------------------------------------------------------
@@ -214,7 +224,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (15, 'auth', '0010_alter_group_name_max_length', '2026-02-12 08:25:55.230583'),
 (16, 'auth', '0011_update_proxy_permissions', '2026-02-12 08:25:55.236710'),
 (17, 'auth', '0012_alter_user_first_name_max_length', '2026-02-12 08:25:55.253060'),
-(18, 'sessions', '0001_initial', '2026-02-12 08:25:55.299525');
+(18, 'sessions', '0001_initial', '2026-02-12 08:25:55.299525'),
+(19, 'main', '0001_initial', '2026-03-15 10:32:27.701853');
 
 -- --------------------------------------------------------
 
@@ -234,6 +245,79 @@ CREATE TABLE `django_session` (
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('lvp6odsav8yiyw6rlnp4hxmsrubxccjp', '.eJxVjEEOwiAQRe_C2hCGMoAu3XsGMsAgVUOT0q6Md7dNutDtf-_9twi0LjWsnecwZnERIE6_W6T05LaD_KB2n2Sa2jKPUe6KPGiXtynz63q4fweVet3qAsWBKT6i9lkZwASQAJmN9aC0QkaiTbDkcoGUz4U9KjPoIbEDZcXnC9IrN18:1vqS2s:n0Ns9a0gt8hFsZPG3fepKF6aphM7CckJMd_LiNtyfh4', '2026-02-26 08:27:30.079272');
+
+-- --------------------------------------------------------
+
+--
+-- Структура на таблица `main_computer`
+--
+
+CREATE TABLE `main_computer` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `mac_address` varchar(17) NOT NULL,
+  `ip_address` char(39) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Схема на данните от таблица `main_computer`
+--
+
+INSERT INTO `main_computer` (`id`, `name`, `mac_address`, `ip_address`, `created_at`) VALUES
+(2, 'test', '50:65:F3:40:03:92', '192.168.100.255', '2026-03-15 13:58:50.306377');
+
+-- --------------------------------------------------------
+
+--
+-- Структура на таблица `main_wakelog`
+--
+
+CREATE TABLE `main_wakelog` (
+  `id` bigint(20) NOT NULL,
+  `target_mac` varchar(17) NOT NULL,
+  `timestamp` datetime(6) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `message` longtext DEFAULT NULL,
+  `computer_id` bigint(20) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Схема на данните от таблица `main_wakelog`
+--
+
+INSERT INTO `main_wakelog` (`id`, `target_mac`, `timestamp`, `status`, `message`, `computer_id`, `user_id`) VALUES
+(1, '74:d4:dd:38:a1:0e', '2026-03-15 10:52:16.197989', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(2, '74:d4:dd:38:a1:0e', '2026-03-15 12:05:16.217091', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(3, '74:d4:dd:38:a1:0e', '2026-03-15 12:19:42.422869', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(4, '74:d4:dd:38:a1:0e', '2026-03-15 12:28:19.398186', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(5, '74:d4:dd:38:a1:0e', '2026-03-15 12:32:19.035875', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(6, '74:d4:dd:38:a1:0e', '2026-03-15 12:38:18.546346', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(7, '74:d4:dd:38:a1:0e', '2026-03-15 12:38:48.382418', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(8, '50:65:F3:40:03:92', '2026-03-15 13:01:56.310926', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(9, '50:65:F3:40:03:92', '2026-03-15 13:03:48.148200', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(10, '50:65:F3:40:03:92', '2026-03-15 13:13:11.818821', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(11, '50:65:F3:40:03:92', '2026-03-15 13:13:39.114651', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(12, '50:65:F3:40:03:92', '2026-03-15 13:13:53.528434', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(13, '50:65:F3:40:03:92', '2026-03-15 13:14:03.834394', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(14, '50:65:F3:40:03:92', '2026-03-15 13:14:20.602371', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(15, '50:65:F3:40:03:92', '2026-03-15 13:16:36.090167', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(16, '50:65:F3:40:03:92', '2026-03-15 13:17:05.048494', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(17, '50:65:F3:40:03:92', '2026-03-15 13:20:07.841352', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(18, '50:65:F3:40:03:92', '2026-03-15 13:24:14.463277', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(19, '50:65:F3:40:03:92', '2026-03-15 13:24:58.985230', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(20, '50:65:F3:40:03:92', '2026-03-15 13:26:56.576606', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(21, '50:65:F3:40:03:92', '2026-03-15 13:27:20.645950', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(22, '50:65:F3:40:03:92', '2026-03-15 13:33:27.687665', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(23, '50:65:F3:40:03:92', '2026-03-15 13:33:46.622855', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(24, '50:65:F3:40:03:92', '2026-03-15 13:35:17.231303', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(25, '50:65:F3:40:03:92', '2026-03-15 13:36:02.577300', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(26, '50:65:F3:40:03:92', '2026-03-15 13:36:23.573271', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(27, '50:65:F3:40:03:92', '2026-03-15 13:49:16.548593', 'success', 'WOL пакетът е изпратен успешно.', NULL, NULL),
+(28, '50:65:F3:40:03:92', '2026-03-15 13:58:54.184239', 'success', 'WOL пакетът е изпратен успешно.', 2, NULL),
+(29, '50:65:F3:40:03:92', '2026-03-15 14:16:39.216372', 'success', 'WOL пакетът е изпратен успешно.', 2, NULL),
+(30, '50:65:F3:40:03:92', '2026-03-15 14:19:18.398897', 'success', 'WOL пакетът е изпратен успешно.', 2, NULL);
 
 --
 -- Indexes for dumped tables
@@ -313,6 +397,20 @@ ALTER TABLE `django_session`
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
 --
+-- Индекси за таблица `main_computer`
+--
+ALTER TABLE `main_computer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индекси за таблица `main_wakelog`
+--
+ALTER TABLE `main_wakelog`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `main_wakelog_computer_id_b2657592_fk_main_computer_id` (`computer_id`),
+  ADD KEY `main_wakelog_user_id_bc222ac2_fk_auth_user_id` (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -332,7 +430,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
@@ -362,13 +460,25 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `main_computer`
+--
+ALTER TABLE `main_computer`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `main_wakelog`
+--
+ALTER TABLE `main_wakelog`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Ограничения за дъмпнати таблици
@@ -407,6 +517,13 @@ ALTER TABLE `auth_user_user_permissions`
 ALTER TABLE `django_admin_log`
   ADD CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   ADD CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Ограничения за таблица `main_wakelog`
+--
+ALTER TABLE `main_wakelog`
+  ADD CONSTRAINT `main_wakelog_computer_id_b2657592_fk_main_computer_id` FOREIGN KEY (`computer_id`) REFERENCES `main_computer` (`id`),
+  ADD CONSTRAINT `main_wakelog_user_id_bc222ac2_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
