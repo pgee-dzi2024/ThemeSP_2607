@@ -24,7 +24,7 @@
     <div class="row">
         <!-- ЛЯВА КОЛОНА: Управление -->
         <div class="col-md-5 mb-4">
-
+            
             <!-- Карточка: Ръчно събуждане -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-white">
@@ -196,7 +196,7 @@
                 try {
                     const response = await axios.post('/api/wake/', { mac_address: this.manualMac });
                     this.showAlert(response.data.message, 'success');
-                    this.manualMac = '';
+                    this.manualMac = ''; 
                     this.fetchLogs();
                 } catch (error) {
                     const errorMsg = error.response?.data?.error || "Грешка при изпращането.";

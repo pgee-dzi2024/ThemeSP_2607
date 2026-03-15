@@ -23,7 +23,7 @@
 
     <div class="row">
         <!-- ЛЯВА КОЛОНА: Управление -->
-        <div class="col-md-5 mb-4">
+        <div class="col-md-6 mb-4">
 
             <!-- Карточка: Ръчно събуждане -->
             <div class="card shadow-sm mb-4">
@@ -34,7 +34,7 @@
                     <form @submit.prevent="wakeManual">
                         <div class="mb-3">
                             <label class="form-label">MAC Адрес</label>
-                            <input type="text" v-model="manualMac" class="form-control" placeholder="XX:XX:XX:XX:XX:XX" required>
+                            <input type="text" v-model="manualMac" class="form-control" placeholder="напр. 00:1A:2B:3C:4D:5E" required>
                         </div>
                         <button type="submit" class="btn btn-primary w-100" :disabled="loading">
                             <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -44,68 +44,39 @@
                 </div>
             </div>
 
-            <!-- НОВА Карточка: Добавяне на компютър -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-header bg-white">
-                    <h5 class="card-title mb-0">Запазване на нов компютър</h5>
+            <!-- Карточка: Запазени компютри -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Запазени компютри</h5>
                 </div>
-                <div class="card-body">
-                    <form @submit.prevent="addComputer">
-                        <div class="mb-3">
-                            <label class="form-label">Име на компютъра</label>
-                            <input type="text" v-model="newComputer.name" class="form-control" placeholder="напр. Офис PC 1" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">MAC Адрес</label>
-                            <input type="text" v-model="newComputer.mac_address" class="form-control" placeholder="XX:XX:XX:XX:XX:XX" required>
-                        </div>
-                        <button type="submit" class="btn btn-success w-100">
-                            Запази в списъка
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- СРЕДНА КОЛОНА: Списък с компютри -->
-        <div class="col-md-3 mb-4">
-            <div class="card shadow-sm h-100">
-                <div class="card-header bg-white">
-                    <h5 class="card-title mb-0">Списък машини</h5>
-                </div>
-                <ul class="list-group list-group-flush" style="max-height: 500px; overflow-y: auto;">
-                    <li v-for="comp in computers" :key="comp.id" class="list-group-item">
-                        <div class="mb-2">
+                <ul class="list-group list-group-flush">
+                    <li v-for="comp in computers" :key="comp.id" class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
                             <strong>[[ comp.name ]]</strong><br>
                             <small class="text-muted">[[ comp.mac_address ]]</small>
                         </div>
-                        <div class="d-flex gap-2">
-                            <button @click="wakeComputer(comp.id)" class="btn btn-sm btn-outline-primary flex-grow-1" :disabled="loading">
-                                Събуди
-                            </button>
-                            <button @click="deleteComputer(comp.id)" class="btn btn-sm btn-outline-danger" title="Изтрий">
-                                ✖
-                            </button>
-                        </div>
+                        <button @click="wakeComputer(comp.id)" class="btn btn-sm btn-outline-success" :disabled="loading">
+                            Събуди
+                        </button>
                     </li>
                     <li v-if="computers.length === 0" class="list-group-item text-center text-muted">
-                        Няма добавени компютри.
+                        Няма добавени компютри. Можете да добавите през админ панела.
                     </li>
                 </ul>
             </div>
+
         </div>
 
         <!-- ДЯСНА КОЛОНА: История (Логове) -->
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm h-100">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
                 <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                    <h5 class="card-title mb-0">История</h5>
+                    <h5 class="card-title mb-0">История на събитията</h5>
                     <button @click="fetchLogs" class="btn btn-sm btn-outline-secondary">Опресни</button>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
-                        <table class="table table-hover mb-0 text-sm">
+                        <table class="table table-hover mb-0">
                             <thead class="table-light">
                                 <tr>
                                     <th>Дата/Час</th>
@@ -115,8 +86,8 @@
                             </thead>
                             <tbody>
                                 <tr v-for="log in logs" :key="log.id">
-                                    <td style="font-size: 0.85em;">[[ formatDate(log.timestamp) ]]</td>
-                                    <td style="font-size: 0.85em;">
+                                    <td>[[ formatDate(log.timestamp) ]]</td>
+                                    <td>
                                         [[ log.computer_name ]]<br>
                                         <small class="text-muted">[[ log.target_mac ]]</small>
                                     </td>
@@ -126,7 +97,7 @@
                                     </td>
                                 </tr>
                                 <tr v-if="logs.length === 0">
-                                    <td colspan="3" class="text-center text-muted">Няма записи.</td>
+                                    <td colspan="3" class="text-center text-muted">Няма записи в историята.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -137,8 +108,9 @@
     </div>
 </div>
 
+<!-- Django CSRF Token за сигурност при POST заявките -->
 <script>
-    // CSRF настройка
+    // Взимане на CSRF токена от бисквитките (стандартно за Django)
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -153,8 +125,10 @@
         }
         return cookieValue;
     }
-    axios.defaults.headers.common['X-CSRFToken'] = getCookie('csrftoken');
+    const csrftoken = getCookie('csrftoken');
+    axios.defaults.headers.common['X-CSRFToken'] = csrftoken;
 
+    // Vue 3 Приложение
     const { createApp } = Vue;
 
     createApp({
@@ -162,7 +136,6 @@
         data() {
             return {
                 manualMac: '',
-                newComputer: { name: '', mac_address: '' },
                 computers: [],
                 logs: [],
                 loading: false,
@@ -172,6 +145,7 @@
         methods: {
             showAlert(message, type = 'success') {
                 this.alert = { message, type };
+                // Скриване на съобщението след 5 секунди
                 setTimeout(() => { this.alert.message = ''; }, 5000);
             },
             async fetchComputers() {
@@ -196,10 +170,10 @@
                 try {
                     const response = await axios.post('/api/wake/', { mac_address: this.manualMac });
                     this.showAlert(response.data.message, 'success');
-                    this.manualMac = '';
-                    this.fetchLogs();
+                    this.manualMac = ''; // Изчистване на полето
+                    this.fetchLogs();    // Опресняване на историята
                 } catch (error) {
-                    const errorMsg = error.response?.data?.error || "Грешка при изпращането.";
+                    const errorMsg = error.response?.data?.error || "Възникна грешка при изпращането.";
                     this.showAlert(errorMsg, 'error');
                 } finally {
                     this.loading = false;
@@ -212,37 +186,10 @@
                     this.showAlert(response.data.message, 'success');
                     this.fetchLogs();
                 } catch (error) {
-                    const errorMsg = error.response?.data?.error || "Грешка при изпращането.";
+                    const errorMsg = error.response?.data?.error || "Възникна грешка при изпращането.";
                     this.showAlert(errorMsg, 'error');
                 } finally {
                     this.loading = false;
-                }
-            },
-            // НОВ МЕТОД: Добавяне на компютър
-            async addComputer() {
-                try {
-                    await axios.post('/api/computers/', this.newComputer);
-                    this.showAlert('Компютърът е запазен успешно!', 'success');
-                    this.newComputer = { name: '', mac_address: '' }; // Изчистване на формата
-                    this.fetchComputers(); // Опресняване на списъка
-                } catch (error) {
-                    let errorMsg = "Грешка при запазване.";
-                    // Ако Django върне грешка за валидация (напр. невалиден MAC)
-                    if (error.response?.data?.mac_address) {
-                        errorMsg = "Невалиден формат на MAC адреса.";
-                    }
-                    this.showAlert(errorMsg, 'error');
-                }
-            },
-            // НОВ МЕТОД: Изтриване на компютър
-            async deleteComputer(id) {
-                if (!confirm("Сигурни ли сте, че искате да изтриете този компютър?")) return;
-                try {
-                    await axios.delete(`/api/computers/${id}/`);
-                    this.showAlert('Компютърът е изтрит.', 'success');
-                    this.fetchComputers();
-                } catch (error) {
-                    this.showAlert("Грешка при изтриване.", 'error');
                 }
             },
             formatDate(dateString) {
@@ -251,12 +198,14 @@
             }
         },
         mounted() {
+            // При зареждане на страницата, взимаме данните от API-то
             this.fetchComputers();
             this.fetchLogs();
         }
     }).mount('#app');
 </script>
 
+<!-- Bootstrap JS (за функционалността на затваряне на съобщенията) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
